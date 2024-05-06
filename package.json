@@ -20,6 +20,7 @@
 	"devDependencies": {
 		"@emotion/babel-plugin": "^11.11.0",
 		"@emotion/react": "^11.11.4",
+		"@types/node": "^20.12.8",
 		"@types/react": "^18.2.66",
 		"@types/react-dom": "^18.2.22",
 		"@typescript-eslint/eslint-plugin": "^7.2.0",
@@ -35,7 +36,7 @@
 		"vite": "^5.2.0"
 	},
 	"lint-staged": {
-		"*.{ts,tsx}": "lint",
+		"*./src/*.{ts,tsx}": "lint",
 		"*./src": "format"
 	}
 }
