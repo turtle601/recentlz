@@ -1,6 +1,9 @@
 import express, { Request, Response } from 'express';
 import { Sequelize } from 'sequelize';
 
+import { NEWJEANS_OMG_VIDEO_ID } from './utils/url';
+import { getVideoAllComments } from './service/video/comments';
+
 const app = express();
 
 require('dotenv').config();
@@ -15,7 +18,9 @@ const sequelize = new Sequelize(
   }
 );
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', async (req: Request, res: Response) => {
+  const allComments = await getVideoAllComments(NEWJEANS_OMG_VIDEO_ID);
+
   res.json('Hello World!');
 });
 
