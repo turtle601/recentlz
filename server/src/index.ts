@@ -2,7 +2,6 @@ import express, { Request, Response } from 'express';
 import { Sequelize } from 'sequelize';
 
 const app = express();
-const PORT = process.env.PORT;
 
 require('dotenv').config();
 
@@ -20,7 +19,7 @@ app.get('/', (req: Request, res: Response) => {
   res.json('Hello World!');
 });
 
-app.listen(PORT, async () => {
+app.listen(process.env.PORT, async () => {
   try {
     await sequelize.authenticate();
     console.log('DB 연결 성공!');
