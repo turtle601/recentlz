@@ -1,15 +1,5 @@
-// example files
-import express from 'express';
-import hello from './hello';
+// import express from 'express';
 
-const routers = express.Router();
+// const routers = express.Router();
 
-routers.get('/', (req, res) => {
-  res.json({
-    message: 'Root API',
-  });
-});
-
-routers.use('/hello', hello);
-
-export default routers;
+// export default routers;
