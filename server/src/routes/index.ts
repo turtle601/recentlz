@@ -1,5 +1,8 @@
-// import express from 'express';
+import { Router } from 'express';
+import comments from './comments';
 
-// const routers = express.Router();
+const routers = Router();
 
-// export default routers;
+routers.use('/comments', comments);
+
+export default routers;
