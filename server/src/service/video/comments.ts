@@ -31,6 +31,7 @@ export const getVideoAllComments = async (videoId: string) => {
 export const updateComments = async ({
   videoId,
   commentsIdList,
+  removed,
 }: CommentsType) => {
   const existingComment = await DB.Comments.findOne({
     where: { videoId },
@@ -40,6 +41,7 @@ export const updateComments = async ({
     await DB.Comments.update(
       {
         commentsIdList,
+        removed,
       },
       {
         where: {
@@ -51,6 +53,7 @@ export const updateComments = async ({
     await DB.Comments.create({
       videoId,
       commentsIdList,
+      removed: 0,
     });
   }
 };
@@ -63,21 +66,29 @@ export const getComments = async (videoId: string): Promise<string[]> => {
   return existingComment ? JSON.parse(existingComment.commentsIdList) : [];
 };
 
-export const getRemovedCommentsCount = async (videoId: string) => {
+export const updateRemovedCommentsCount = async (videoId: string) => {
   const recentComments = await getVideoAllComments(videoId);
   const dbComments = await getComments(videoId);
+
+  const recentCommentsSet = new Set(recentComments);
+
+  const removedCount =
+    dbComments.length -
+    dbComments.filter((commentId) => {
+      return recentCommentsSet.has(commentId);
+    }).length;
 
   await updateComments({
     videoId,
     commentsIdList: JSON.stringify(recentComments),
+    removed: removedCount,
+  });
+};
+
+export const getRemovedCommentsCount = async (videoId: string) => {
+  const existingComment = await DB.Comments.findOne({
+    where: { videoId },
   });
 
-  const recentCommentsSet = new Set(recentComments);
-
-  return (
-    dbComments.length -
-    dbComments.filter((commentId) => {
-      return recentCommentsSet.has(commentId);
-    }).length
-  );
+  return existingComment ? existingComment.removed : 0;
 };
