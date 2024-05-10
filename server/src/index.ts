@@ -1,7 +1,8 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
 import DB from './models';
 import routers from './routes';
+import { cronNewJeanOMGFn } from './utils/cron';
 
 const app = express();
 
@@ -16,9 +17,7 @@ DB.sequelize
 
 app.use('/api/v1', routers);
 
-app.get('/', async (req: Request, res: Response) => {
-  res.json('Hello World!');
-});
+cronNewJeanOMGFn.start();
 
 app.listen(3000, async () => {
   console.log('Server is opening');
