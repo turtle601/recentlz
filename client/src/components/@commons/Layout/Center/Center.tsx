@@ -6,26 +6,26 @@ import type { CenterProps } from '@/components/@commons/Layout/Center/Center.typ
 import type { PolymorpicProps } from '@/@types/polymorpic';
 
 const Center = <T extends ElementType = 'div'>({
-	as,
-	children,
-	direction,
-	styles = {},
-	...attribute
+  as,
+  children,
+  direction,
+  styles = {},
+  ...attribute
 }: PolymorpicProps<T, CenterProps>) => {
-	const Element = as || 'div';
+  const Element = as || 'div';
 
-	return (
-		<Flex
-			as={Element}
-			direction={direction}
-			justify="center"
-			align="center"
-			styles={styles}
-			{...attribute}
-		>
-			{children}
-		</Flex>
-	);
+  return (
+    <Flex
+      as={Element}
+      direction={direction}
+      justify="center"
+      align="center"
+      styles={styles}
+      {...attribute}
+    >
+      {children}
+    </Flex>
+  );
 };
 
 export default Center;

@@ -6,27 +6,27 @@ import type { PolymorpicProps } from '@/@types/polymorpic';
 import type { ContainerProps } from '@/components/@commons/Layout/Container/Container.type';
 
 function Container<T extends ElementType = 'div'>({
-	as,
-	maxWidth = 'none',
-	minWidth = 'none',
-	styles = {},
-	children,
-	...attribute
+  as,
+  maxWidth = 'none',
+  minWidth = 'none',
+  styles = {},
+  children,
+  ...attribute
 }: PolymorpicProps<T, ContainerProps>) {
-	const Element = as || 'div';
+  const Element = as || 'div';
 
-	return (
-		<Element
-			css={getContainerStyle({
-				minWidth,
-				maxWidth,
-				styles,
-			})}
-			{...attribute}
-		>
-			{children}
-		</Element>
-	);
+  return (
+    <Element
+      css={getContainerStyle({
+        minWidth,
+        maxWidth,
+        styles,
+      })}
+      {...attribute}
+    >
+      {children}
+    </Element>
+  );
 }
 
 export default Container;

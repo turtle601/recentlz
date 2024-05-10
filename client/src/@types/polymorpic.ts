@@ -1,12 +1,12 @@
 import {
-	ComponentPropsWithoutRef,
-	ElementType,
-	PropsWithChildren,
+  ComponentPropsWithoutRef,
+  ElementType,
+  PropsWithChildren,
 } from 'react';
 
 export type PolymorpicProps<T extends ElementType, P> = PropsWithChildren<
-	{
-		as?: T;
-	} & P &
-		ComponentPropsWithoutRef<T>
+  {
+    as?: T;
+  } & P &
+    ComponentPropsWithoutRef<T>
 >;

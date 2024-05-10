@@ -1,9 +1,9 @@
 import { CSSProperties } from 'react';
 
 export interface FlexProps {
-	direction?: CSSProperties['flexDirection'];
-	justify?: CSSProperties['justifyContent'];
-	align?: CSSProperties['alignItems'];
-	gap?: CSSProperties['gap'];
-	styles?: CSSProperties;
+  direction?: CSSProperties['flexDirection'];
+  justify?: CSSProperties['justifyContent'];
+  align?: CSSProperties['alignItems'];
+  gap?: CSSProperties['gap'];
+  styles?: CSSProperties;
 }
