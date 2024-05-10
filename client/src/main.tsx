@@ -10,5 +10,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Global styles={globalStyle} />
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 );
