@@ -1,3 +1,6 @@
+import svgr from 'vite-plugin-svgr';
+import { mergeConfig } from 'vite';
+
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
@@ -16,6 +19,10 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+  viteFinal: (config) =>
+    mergeConfig(config, {
+      plugins: [svgr({ include: '**/*.svg' })],
+    }),
 };
 
 export default config;
