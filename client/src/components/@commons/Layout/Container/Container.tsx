@@ -1,5 +1,6 @@
 import { ElementType } from 'react';
 
+import Center from '@/components/@commons/Layout/Center/Center';
 import { getContainerStyle } from '@/components/@commons/Layout/Container/Container.style';
 
 import type { PolymorpicProps } from '@/@types/polymorpic';
@@ -16,16 +17,18 @@ function Container<T extends ElementType = 'div'>({
   const Element = as || 'div';
 
   return (
-    <Element
-      css={getContainerStyle({
-        minWidth,
-        maxWidth,
-        styles,
-      })}
-      {...attribute}
-    >
-      {children}
-    </Element>
+    <Center direction="column">
+      <Element
+        css={getContainerStyle({
+          minWidth,
+          maxWidth,
+          styles,
+        })}
+        {...attribute}
+      >
+        {children}
+      </Element>
+    </Center>
   );
 }
 
