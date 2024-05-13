@@ -21,7 +21,6 @@ export const globalStyle = css({
 
   a: {
     textDecoration: 'none',
-    color: color.blue700,
   },
 
   button: {
