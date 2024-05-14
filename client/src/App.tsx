@@ -1,5 +1,12 @@
+import { Suspense } from 'react';
+import VideoInfo from '@/components/domain/VideoInfo/VideoInfo';
+
 function App() {
-	return <div>뉴진스 1945</div>;
+  return (
+    <Suspense fallback={<div>로딩중</div>}>
+      <VideoInfo videoId="gFJ-obHmtE4" />
+    </Suspense>
+  );
 }
 
 export default App;

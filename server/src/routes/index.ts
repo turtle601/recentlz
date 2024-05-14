@@ -1,5 +1,11 @@
-// import express from 'express';
+import { Router } from 'express';
 
-// const routers = express.Router();
+import videoInfo from './info';
+import chart from './chart';
 
-// export default routers;
+const routers = Router();
+
+routers.use('/info', videoInfo);
+routers.use('/chart', chart);
+
+export default routers;

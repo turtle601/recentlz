@@ -1,29 +1,27 @@
-import express, { Request, Response } from 'express';
-import { Sequelize } from 'sequelize';
+import express from 'express';
+
+import DB from './models';
+import routers from './routes';
+
+import { cronNewJeanOMGFn } from './utils/cron';
 
 const app = express();
 
-require('dotenv').config();
+DB.sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log('데이터베이스 연결됨.');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
-const sequelize = new Sequelize(
-  process.env.DATABASE_NAME || '',
-  process.env.DATABASE_USERNAME || '',
-  process.env.DATABASE_PASSWORD,
-  {
-    host: process.env.DATABASE_HOST,
-    dialect: 'mysql',
-  }
-);
+app.use('/api/v1', routers);
 
-app.get('/', (req: Request, res: Response) => {
-  res.json('Hello World!');
-});
+cronNewJeanOMGFn.start();
 
-app.listen(process.env.PORT, async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('DB 연결 성공!');
-  } catch (err) {
-    console.log('DB 연결 X', err);
-  }
+// cronSUYAFn.start();
+
+app.listen(3000, async () => {
+  console.log('Server is opening');
 });
