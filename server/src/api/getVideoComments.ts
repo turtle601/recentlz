@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { getYoubueAPI } from '../utils/url';
 
-import type { CommentThreadListResponse } from '../interface/video';
-
+import type { CommentThreadListResponse } from '../interface/api/comment';
 interface Parameter {
   videoId: string;
   maxResult: number;

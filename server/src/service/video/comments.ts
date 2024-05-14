@@ -1,9 +1,11 @@
-import { getVideoComments } from '../../api/getVideoComments';
-import { CommentsType } from '../../interface/comments';
-
 import DB from '../../models';
 
-export const getVideoAllComments = async (videoId: string) => {
+import { getVideoComments } from '../../api/getVideoComments';
+import { CommentType } from '../../interface/db/comment';
+
+export const getVideoAllComments = async (
+  videoId: string
+): Promise<string[]> => {
   const result = [];
   let pageToken = '';
 
@@ -31,17 +33,15 @@ export const getVideoAllComments = async (videoId: string) => {
 export const updateComments = async ({
   videoId,
   commentsIdList,
-  removed,
-}: CommentsType) => {
-  const existingComment = await DB.Comments.findOne({
+}: CommentType) => {
+  const existingComment = await DB.Comment.findOne({
     where: { videoId },
   });
 
   if (existingComment) {
-    await DB.Comments.update(
+    await DB.Comment.update(
       {
         commentsIdList,
-        removed,
       },
       {
         where: {
@@ -50,45 +50,17 @@ export const updateComments = async ({
       }
     );
   } else {
-    await DB.Comments.create({
+    await DB.Comment.create({
       videoId,
       commentsIdList,
-      removed: 0,
     });
   }
 };
 
 export const getComments = async (videoId: string): Promise<string[]> => {
-  const existingComment = await DB.Comments.findOne({
+  const existingComment = await DB.Comment.findOne({
     where: { videoId },
   });
 
   return existingComment ? JSON.parse(existingComment.commentsIdList) : [];
-};
-
-export const updateRemovedCommentsCount = async (videoId: string) => {
-  const recentComments = await getVideoAllComments(videoId);
-  const dbComments = await getComments(videoId);
-
-  const recentCommentsSet = new Set(recentComments);
-
-  const removedCount =
-    dbComments.length -
-    dbComments.filter((commentId) => {
-      return recentCommentsSet.has(commentId);
-    }).length;
-
-  await updateComments({
-    videoId,
-    commentsIdList: JSON.stringify(recentComments),
-    removed: removedCount,
-  });
-};
-
-export const getRemovedCommentsCount = async (videoId: string) => {
-  const existingComment = await DB.Comments.findOne({
-    where: { videoId },
-  });
-
-  return existingComment ? existingComment.removed : 0;
 };
