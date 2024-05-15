@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "./dist",
     "sourceMap": true,
     "target": "ES6",
     "module": "commonjs",
@@ -11,5 +11,6 @@
     "skipLibCheck": true,
     "moduleDetection": "force"
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "ecosystem.config.js"],
+  "exclude": ["node_modules"]
 }

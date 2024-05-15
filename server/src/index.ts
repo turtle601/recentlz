@@ -5,23 +5,19 @@ import routers from './routes';
 
 import { cronNewJeanOMGFn } from './utils/cron';
 
-const app = express();
+import { PORT } from './config/config';
 
-DB.sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log('데이터베이스 연결됨.');
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+const app = express();
 
 app.use('/api/v1', routers);
 
-cronNewJeanOMGFn.start();
-
-// cronSUYAFn.start();
-
-app.listen(3000, async () => {
-  console.log('Server is opening');
+app.listen(PORT, async () => {
+  try {
+    await DB.sequelize.authenticate();
+    await DB.sequelize.sync({ alter: true });
+    console.log('DB 연결 성공!');
+    cronNewJeanOMGFn.start();
+  } catch (err) {
+    console.log('DB 연결 X', err);
+  }
 });

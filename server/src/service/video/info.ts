@@ -1,7 +1,6 @@
 import DB from '../../models';
 
 import { getVidoeInfo } from '../../api/getVideoInfo';
-import { VideoInfoType } from '../../interface/db/video';
 
 export const updateVideoInfo = async (videoId: string) => {
   const videoInfo = await getVidoeInfo(videoId);

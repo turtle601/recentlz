@@ -6,6 +6,7 @@
   "scripts": {
     "start": "ts-node .",
     "dev": "nodemon src/index.ts",
+    "build:test": "nodemon dist/index.js",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "test": "vitest"

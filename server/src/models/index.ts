@@ -1,19 +1,23 @@
-import { CommentOrmType } from './../interface/db/comment';
-import dotenv from 'dotenv';
 import { Sequelize, DataTypes } from 'sequelize';
 
-import type { DBType } from '../interface/db';
-import type { VideoInfoOrmType } from '../interface/db/video';
-import { ChartOrmType } from '../interface/db/chart';
+import {
+  DATABASE_HOST,
+  DATABASE_NAME,
+  DATABASE_PASSWORD,
+  DATABASE_USERNAME,
+} from '../config/config';
 
-dotenv.config();
+import type { CommentOrmType } from './../interface/db/comment';
+import type { ChartOrmType } from '../interface/db/chart';
+import type { VideoInfoOrmType } from '../interface/db/video';
+import type { DBType } from '../interface/db';
 
 const sequelize = new Sequelize(
-  process.env.DATABASE_NAME || '',
-  process.env.DATABASE_USERNAME || '',
-  process.env.DATABASE_PASSWORD || '',
+  DATABASE_NAME,
+  DATABASE_USERNAME,
+  DATABASE_PASSWORD,
   {
-    host: process.env.DATABASE_HOST,
+    host: DATABASE_HOST,
     dialect: 'mysql',
   }
 );

@@ -17,6 +17,7 @@ export const cronNewJeanOMGFn = cron.schedule(
   }
 );
 
+/* 테스트 용 */
 // export const cronSUYAFn = cron.schedule(
 //   '* * * * *',
 //   async () => {
